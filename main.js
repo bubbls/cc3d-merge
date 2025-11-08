@@ -31,13 +31,13 @@ function getParts(file, start, end) {
     return parts;
 }
 Promise.all([
-    mergeFiles(getParts("CrazyCattle3D.pck", 1, 2)),
-    mergeFiles(getParts("CrazyCattle3D.wasm", 1, 3))
+    mergeFiles(getParts("index.pck", 1, 3)),
+    mergeFiles(getParts("index.wasm", 1, 3))
 ]).then(([pckUrl, wasmUrl]) => {
     window.fetch = async function (url, ...args) {
-        if (url.endsWith("CrazyCattle3D.pck")) {
+        if (url.endsWith("index.pck")) {
             return originalFetch(pckUrl, ...args);
-        } else if (url.endsWith("CrazyCattle3D.wasm")) {
+        } else if (url.endsWith("index.wasm")) {
             return originalFetch(wasmUrl, ...args);
         } else {
             return originalFetch(url, ...args);
